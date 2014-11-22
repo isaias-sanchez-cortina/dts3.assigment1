@@ -1,0 +1,95 @@
+---
+title: "DTS3. Assigment 1. Codebook"
+author: "Isaias Sanchez-Cortina"
+date: "22-11-2014"
+output: html_document
+---
+
+## DTS3. Assigment 1. Codebook
+
+ - This document summarises the values contents of the variables in 'tidy.txt'.
+
+ - Also, **at the END of this document, the variables are listed and explained**.
+
+
+Summary of the tidy Features 
+=================
+```{r  echo=FALSE,results='asis'}
+# Data is found in directory
+#this.dir<-setwd( (dirname(parent.frame(2)$ofile))) ; # set dir to this script's location
+tidy<-read.table("tidy.txt",header=TRUE)
+s<-summary(tidy)
+library(knitr)
+for (i in seq(6,dim(s)[2],6)) {
+  tab <- kable(summary(tidy)[,(i-5):i])
+  print(tab, type="html")
+}
+```
+
+Features
+=================
+  - **Subject** : The first feature is an integer (from 1 to 30) which indicates which subject the data belongs to. 
+  
+  - **Activity** : The second feature is a string naming the action perfomed by the subject:
+
+*"WALKING"    "WALKING_UPSTAIRS"     "WALKING_DOWNSTAIRS" "SITTING"  "STANDING"  "LAYING"*
+
+  - The next 46 features are the **MEAN** of raw and fourier-transformed signals from the 3-axial accelerometer and gyroscope.   
+
+  (*The original data set contained way more features*)
+
+-- **Time Features** : captured at a constant rate of 50 Hz. Then they were filtered using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to remove noise. Similarly, the acceleration signal was then separated into body and gravity acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth filter with a corner frequency of 0.3 Hz.
+
+   Subsequently, the body linear acceleration and angular velocity were derived in time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ). Also the magnitude of these three-dimensional signals were calculated using the Euclidean norm (tBodyAccMag, tGravityAccMag, tBodyAccJerkMag, tBodyGyroMag, tBodyGyroJerkMag):
+  
+*tBodyAcc.mean...X
+tBodyAcc.mean...Y
+tBodyAcc.mean...Z
+tGravityAcc.mean...X
+tGravityAcc.mean...Y
+tGravityAcc.mean...Z
+tBodyAccJerk.mean...X
+tBodyAccJerk.mean...Y
+tBodyAccJerk.mean...Z
+tBodyGyro.mean...X
+tBodyGyro.mean...Y
+tBodyGyro.mean...Z
+tBodyGyroJerk.mean...X
+tBodyGyroJerk.mean...Y
+tBodyGyroJerk.mean...Z
+tBodyAccMag.mean..
+tGravityAccMag.mean..
+tBodyAccJerkMag.mean..
+tBodyGyroMag.mean..
+tBodyGyroJerkMag.mean..*
+
+ -- **Fast Fourier Transform Features** : Obtained from the raw signals.
+ 
+
+*fBodyAcc.mean...X
+fBodyAcc.mean...Y
+fBodyAcc.mean...Z
+fBodyAcc.meanFreq...X
+fBodyAcc.meanFreq...Y
+fBodyAcc.meanFreq...Z
+fBodyAccJerk.mean...X
+fBodyAccJerk.mean...Y
+fBodyAccJerk.mean...Z
+fBodyAccJerk.meanFreq...X
+fBodyAccJerk.meanFreq...Y
+fBodyAccJerk.meanFreq...Z
+fBodyGyro.mean...X
+fBodyGyro.mean...Y
+fBodyGyro.mean...Z
+fBodyGyro.meanFreq...X
+fBodyGyro.meanFreq...Y
+fBodyGyro.meanFreq...Z
+fBodyAccMag.mean..
+fBodyAccMag.meanFreq..
+fBodyBodyAccJerkMag.mean..
+fBodyBodyAccJerkMag.meanFreq..
+fBodyBodyGyroMag.mean..
+fBodyBodyGyroMag.meanFreq..
+fBodyBodyGyroJerkMag.mean..
+fBodyBodyGyroJerkMag.meanFreq..*
+
